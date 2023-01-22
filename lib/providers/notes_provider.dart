@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../models/notes.dart';
-import '../helpers/db_helper.dart';
+import '../database/text_db.dart';
 
 class NotesProvider with ChangeNotifier {
   List<Notes> _notes = [];
@@ -26,7 +26,7 @@ class NotesProvider with ChangeNotifier {
 
     _notes.add(newNote);
     notifyListeners();
-    DBHelper.insertData(
+    TextDB.insertData(
       'user_notes',
       {
         'id': timestamp.toString().toLowerCase(),
@@ -38,7 +38,7 @@ class NotesProvider with ChangeNotifier {
   }
 
   Future<void> loadAndSetNotes() async {
-    final dataList = await DBHelper.getData('user_notes');
+    final dataList = await TextDB.getData('user_notes');
     _notes = dataList
         .map(
           (note) => Notes(
@@ -56,7 +56,7 @@ class NotesProvider with ChangeNotifier {
   Future<void> updateNote(String id, Notes editedNote) async {
     final noteIndex = _notes.indexWhere((note) => note.id == id);
     if (noteIndex >= 0) {
-      DBHelper.insertData(
+      TextDB.insertData(
         'user_notes',
         {
           'id': editedNote.id.toString().toLowerCase(),
@@ -77,7 +77,7 @@ class NotesProvider with ChangeNotifier {
 
     _notes.removeAt(existingNoteIndex);
 
-    final db = await DBHelper.database();
+    final db = await TextDB.database();
     await db.delete(
       'user_notes',
       where: 'id = ?',

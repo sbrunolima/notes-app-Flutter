@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 //Here all other files
 import '../providers/notes_provider.dart';
 import '../widgets/save_pop_dialog.dart';
 
-Future popUpDialog(BuildContext context, String opendNoteId) {
+Future popUpDialog(BuildContext context, String opendNoteId, var text) {
   return showDialog(
     context: context,
     builder: (context) => Container(
@@ -19,11 +18,14 @@ Future popUpDialog(BuildContext context, String opendNoteId) {
         ),
         title: Center(
           child: Text(
-            'Essa nota será deletada',
-            style: GoogleFonts.roboto(
-              color: Colors.white,
-              fontWeight: FontWeight.normal,
-            ),
+            text.language[0].deleteTitle!.isNotEmpty
+                ? text.language[0].deleteTitle!
+                : 'Essa nota será deletada',
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                ),
           ),
         ),
         actions: [
@@ -40,14 +42,17 @@ Future popUpDialog(BuildContext context, String opendNoteId) {
                       //Navigator.of(context).pop(HomeScreen.routeName);
                       await Provider.of<NotesProvider>(context, listen: false)
                           .deleteNote(opendNoteId.toString());
-                      savePopDialog(context, 'Nota removida', true);
+                      savePopDialog(context,
+                          text.language[0].removePoput.toString(), true);
                     },
                     child: Text(
-                      'Deletar',
-                      style: GoogleFonts.roboto(
-                        color: Colors.redAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      text.language[0].deleteButton!.isNotEmpty
+                          ? text.language[0].deleteButton!
+                          : 'Deletar',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.w700,
+                          ),
                     ),
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(color: Colors.transparent),
@@ -63,11 +68,13 @@ Future popUpDialog(BuildContext context, String opendNoteId) {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      'Cancelar',
-                      style: GoogleFonts.roboto(
-                        color: Colors.redAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      text.language[0].cancelButton!.isNotEmpty
+                          ? text.language[0].cancelButton!
+                          : 'Cancelar',
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.w700,
+                          ),
                     ),
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(color: Colors.transparent),

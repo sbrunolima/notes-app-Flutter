@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:path/path.dart' as path;
 
-class DBHelper {
+class TextDB {
   static Future<sql.Database> database() async {
     final dbPath = await sql.getDatabasesPath();
     return sql.openDatabase(
@@ -15,7 +15,7 @@ class DBHelper {
   }
 
   static Future<void> insertData(String table, Map<String, Object> data) async {
-    final db = await DBHelper.database();
+    final db = await TextDB.database();
     db.insert(
       table,
       data,
@@ -24,7 +24,7 @@ class DBHelper {
   }
 
   static Future<List<Map<String, dynamic>>> getData(String table) async {
-    final db = await DBHelper.database();
+    final db = await TextDB.database();
     return db.query(table);
   }
 }

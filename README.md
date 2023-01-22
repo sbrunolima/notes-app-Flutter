@@ -1,22 +1,15 @@
- - Aplicativo de Notas em Flutter.
- - Você pode:
-    Adicionar, editar, deletar notas.
+A Notes app in Flutter.
+You can:
+ - Add, edit, delete notes.
     
- - Tecnologias ultilizadas:
-    SQL,
-    Flutter
-    Dart
-    PlayStore
+Technologies used:
+ - Flutter
+ - PlayStore
 
- - This is a Notes app in Flutter.
- - You can:
-    Add, edit, delete notes.
-    
- - Technologies used:
-    SQL,
-    flutter
-    dart
-    PlayStore
-
-
+Update notes:
+ - Added english language support
+ - Added White and Dark theme
+ - Fixed words starting with capital letters
+ - Improved text selection
+ - Improved the appearance of the user interface
 
