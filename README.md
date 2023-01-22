@@ -1,4 +1,5 @@
 A Notes app in Flutter.
+
 You can:
  - Add, edit, delete notes.
     
